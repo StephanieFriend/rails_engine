@@ -18,6 +18,11 @@ class Api::V1::ItemsController < ApplicationController
     render_json(item)
   end
 
+  def update
+    item = Item.update(params[:id], item_params)
+    render_json(item)
+  end
+
   private
 
   def item_params
