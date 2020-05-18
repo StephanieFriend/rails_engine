@@ -51,4 +51,23 @@ describe "Items API" do
     expect(Item.count).to eq(3)
     expect(json['data']['attributes']['name']).to eq('Fantastic Beasts And Where To Find Them')
   end
+
+  it "can update an existing item" do
+    merchant = create(:merchant)
+    item = create(:item, merchant_id: merchant.id)
+    previous_id = item.id
+    previous_name = item.name
+    item_params = { name: "Harry Potter And The Cursed Child",
+                    description: "My geekness is a-quivering",
+                    unit_price: 8.00 }
+
+    put "/api/v1/items/#{previous_id}", params: item_params
+
+    expect(response).to be_successful
+
+    json = JSON.parse(response.body)
+
+    expect(json['data']['attributes']['name']).to_not eq(previous_name)
+    expect(json['data']['attributes']['name']).to eq("Harry Potter And The Cursed Child")
+  end
 end
