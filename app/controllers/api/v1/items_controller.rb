@@ -23,6 +23,11 @@ class Api::V1::ItemsController < ApplicationController
     render_json(item)
   end
 
+  def destroy
+    item = Item.destroy(params[:id])
+    render_json(item)
+  end
+
   private
 
   def item_params
