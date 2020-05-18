@@ -70,4 +70,17 @@ describe "Items API" do
     expect(json['data']['attributes']['name']).to_not eq(previous_name)
     expect(json['data']['attributes']['name']).to eq("Harry Potter And The Cursed Child")
   end
+
+  it "can destroy an item" do
+    merchant = create(:merchant)
+    item = create(:item, merchant_id: merchant.id)
+
+    expect(Item.count).to eq(1)
+
+    delete "/api/v1/items/#{item.id}"
+
+    expect(response).to be_successful
+    expect(Item.count).to eq(0)
+    expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
