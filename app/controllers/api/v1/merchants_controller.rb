@@ -31,6 +31,6 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def render_json(merchant)
-    render json: MerchantSerializer.new(merchant).serializable_hash
+    render json: MerchantSerializer.new(merchant)
   end
 end
