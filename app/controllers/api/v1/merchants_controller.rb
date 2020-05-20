@@ -5,13 +5,8 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    if params[:item_id]
-      id = Item.find(params[:item_id]).merchant_id
-      merchant = Merchant.find(id)
-    else
-      merchant = Merchant.find(params[:id])
-    end
-    render_json(merchant)
+   merchant = Merchant.find(params[:id])
+   render_json(merchant)
   end
 
   def create

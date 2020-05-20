@@ -8,6 +8,9 @@ namespace :db do
       CsvCreator.destroy
       csv_hash = SalesEngine.csv_info
       CsvCreator.create(csv_hash)
+      ActiveRecord::Base.connection.tables.each do |t|
+        ActiveRecord::Base.connection.reset_pk_sequence!(t)
+      end
     end
   end
 end

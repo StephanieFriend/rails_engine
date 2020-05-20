@@ -1,11 +1,7 @@
 class Api::V1::ItemsController < ApplicationController
   def index
-    if params[:merchant_id]
-      items = Item.where(merchant_id: params[:merchant_id])
-    else
-      items = Item.all
-    end
-    render_json(items)
+   items = Item.all
+   render_json(items)
   end
 
   def show
@@ -35,6 +31,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def render_json(item)
-    render json: ItemSerializer.new(item).serializable_hash
+    render json: ItemSerializer.new(item)
   end
 end
