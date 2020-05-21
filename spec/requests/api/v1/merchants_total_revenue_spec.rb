@@ -43,13 +43,13 @@ describe "Merchants API" do
     expect(response).to be_successful
     merchant = JSON.parse(response.body, symbolize_names: true)
 
-    expect(merchant[0][:revenue].to_f).to eq(825.72)
+    expect(merchant[:data][:attributes][0][:revenue].to_f).to eq(825.72)
 
     get "/api/v1/merchants/#{merchant_2.id}/revenue"
 
     expect(response).to be_successful
     merchant = JSON.parse(response.body, symbolize_names: true)
 
-    expect(merchant[0][:revenue].to_f).to eq(3064.18)
+    expect(merchant[:data][:attributes][0][:revenue].to_f).to eq(3064.18)
   end
 end
