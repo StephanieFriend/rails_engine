@@ -16,24 +16,6 @@ class Api::V1::Merchants::SearchController < ApplicationController
     render json: MerchantSerializer.new(@grouped_merchants)
   end
 
-  def most_revenue
-    @merchants = Merchant.find_most_revenue(params[:quantity])
-    render json: MerchantSerializer.new(@merchants)
-  end
-
-  def most_items
-    @merchants = Merchant.find_most_items(params[:quantity])
-    render json: MerchantSerializer.new(@merchants)
-  end
-
-  def total_revenue
-    @merchant = Merchant.find(params[:id])
-    revenue = @merchant.find_total_revenue(params[:id])
-    revenue_render = render json: revenue
-    json = JSON.parse(revenue_render, symbolize_names: true)
-    json[0][:revenue].to_f
-  end
-
   private
 
   def filtering_params(params)
